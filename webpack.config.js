@@ -4,6 +4,7 @@ const path = require("path");
 
 module.exports = {
 
+    devtool: "source-map",
     mode: "development",
     entry: path.resolve(__dirname, 'src', 'app'),
     output: {
@@ -17,7 +18,10 @@ module.exports = {
         ]
     },
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        port: 3090,
+        inline: false // To enable browser refresh
+        
     },
     module: {
         rules: [
