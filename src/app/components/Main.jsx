@@ -4,10 +4,14 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../store';
 
+import { ConnectedDashboard } from './Dashboard';
+
 export const Main = () => (
   <Provider store={store}>
     <div>
-      <h1>Dashboard goes here! 127</h1>
+      <h1>(main.jsx - 129) </h1>
+
+      <ConnectedDashboard />
     </div>
   </Provider>
 );
