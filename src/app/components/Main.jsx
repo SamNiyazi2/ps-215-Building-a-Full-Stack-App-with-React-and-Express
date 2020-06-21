@@ -6,12 +6,24 @@ import { store } from '../store';
 
 import { ConnectedDashboard } from './Dashboard';
 
-export const Main = () => (
-  <Provider store={store}>
-    <div>
-      <h1>(main.jsx - 129) </h1>
+// 06/20/2020 08:32 pm - SSN - [20200620-2016] - [001] - M04 - Implementing React components and Redux state - Routing and navigation
 
-      <ConnectedDashboard />
-    </div>
-  </Provider>
+import { Router, Route } from 'react-router-dom';
+import { history } from '../store/history';
+
+import { ConnectedNavigation } from './Navigation';
+
+export const Main = () => (
+  <Router history={history}>
+    <Provider store={store}>
+      <div>
+        <h4>(main.jsx - 131) </h4>
+
+        <ConnectedNavigation />
+
+        {/* <ConnectedDashboard /> */}
+        <Route exact path="/dashboard" render={() => <ConnectedDashboard />} />
+      </div>
+    </Provider>
+  </Router>
 );
