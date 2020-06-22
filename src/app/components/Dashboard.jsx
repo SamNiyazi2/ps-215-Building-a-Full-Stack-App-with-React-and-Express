@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { connectedTaskList, ConnectedTaskList } from './TaskList';
+import { ConnectedTaskList } from './TaskList';
 
 export const Dashboard = ({ groups }) => {
   let keyId = 0;
