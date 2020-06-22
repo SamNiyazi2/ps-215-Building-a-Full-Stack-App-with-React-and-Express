@@ -3,25 +3,40 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { requestTaskCreation, requestForSomeOtherFunction } from '../store/mutations';
+import {
+  requestTaskCreation,
+  requestForSomeOtherFunction,
+} from '../store/mutations';
 
-export const TaskList = ({ tasks, name, id, createNewTask , someOtherFunction}) => (
+// 06/22/2020 07:57 am - SSN - [20200622-0744] - [003] - M04 - Implementing React components and Redux state - Implementing task details
+import { Link } from 'react-router-dom';
+
+export const TaskList = ({
+  tasks,
+  name,
+  id,
+  createNewTask,
+  someOtherFunction,
+}) => (
   <div>
     <h3>{name}</h3>
     <div>
       {tasks.map((task) => (
-        <div key={task.id}> {task.name}</div>
+        <Link to={`/task/${task.id}`} key={task.id}>
+          <div> {task.name}</div>
+        </Link>
       ))}
     </div>
 
     <button onClick={() => createNewTask(id)}>Add New Task</button>
-    <button onClick={() => someOtherFunction(id, 500002)}>Some other function</button>
+    <button onClick={() => someOtherFunction(id, 500002)}>
+      Some other function
+    </button>
   </div>
 );
 
 const mapStateToProps = (state, ownProps) => {
   let groupID = ownProps.id;
-
 
   return {
     name: ownProps.name,
@@ -30,7 +45,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps  = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     createNewTask(id) {
       console.log('Creating new task...', id);
@@ -40,12 +55,14 @@ const mapDispatchToProps  = (dispatch, ownProps) => {
       dispatch(requestTaskCreation(id));
     },
 
-    someOtherFunction(id , someOtherVar) {
-      console.log('someOtherFunction with group id/someOtherVar...', id, someOtherVar);
-      dispatch (requestForSomeOtherFunction(id,someOtherVar));
-      
+    someOtherFunction(id, someOtherVar) {
+      console.log(
+        'someOtherFunction with group id/someOtherVar...',
+        id,
+        someOtherVar
+      );
+      dispatch(requestForSomeOtherFunction(id, someOtherVar));
     },
-
   };
 };
 

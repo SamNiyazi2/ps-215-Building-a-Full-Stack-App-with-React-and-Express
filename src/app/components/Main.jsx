@@ -13,6 +13,9 @@ import { history } from '../store/history';
 
 import { ConnectedNavigation } from './Navigation';
 
+// 06/22/2020 07:50 am - SSN - [20200622-0744] - [002] - M04 - Implementing React components and Redux state - Implementing task details
+import { ConnectedTaskDetail } from './TaskDetails';
+
 export const Main = () => (
   <Router history={history}>
     <Provider store={store}>
@@ -22,7 +25,14 @@ export const Main = () => (
         <ConnectedNavigation />
 
         {/* <ConnectedDashboard /> */}
+
         <Route exact path="/dashboard" render={() => <ConnectedDashboard />} />
+
+        <Route
+          exact
+          path="/task/:id"
+          render={({ match }) => <ConnectedTaskDetail match={match} />}
+        />
       </div>
     </Provider>
   </Router>

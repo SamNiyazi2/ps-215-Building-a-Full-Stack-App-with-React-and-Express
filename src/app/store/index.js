@@ -46,6 +46,46 @@ export const store = createStore(
                     }];
 
 
+
+                // 06/22/2020 08:36 am - SSN - [20200622-0744] - [006] - M04 - Implementing React components and Redux state - Implementing task details
+
+
+                case mutations.SET_TASK_COMPLETE:
+
+
+                    console.log('store/index combineReducer action - ', action.type);
+                    console.log(action);
+
+                    return tasks.map(task => {
+
+                        return (task.id === action.taskID ? { ...task, isComplete: action.isComplete } : task);
+
+                    });
+
+
+
+                case mutations.SET_TASK_NAME:
+
+                    console.log('store/index combineReducer action - ', action.type);
+                    console.log(action);
+
+                    return tasks.map(task => {
+
+                        return (task.id === action.taskID ? { ...task, name: action.name } : task);
+
+                    });
+
+
+                case mutations.SET_TASK_GROUP:
+
+                    console.log('store/index combineReducer action - ', action.type);
+                    console.log(action);
+
+                    return tasks.map(task => {
+
+                        return (task.id == action.taskID ? { ...task, group: action.groupID } : task);
+                    });
+
             }
             return tasks;
 
