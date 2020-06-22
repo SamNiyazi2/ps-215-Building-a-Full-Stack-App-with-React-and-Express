@@ -8,8 +8,11 @@
     "build": "webpack --watch",
     "dev": "webpack-dev-server --open --watch",
     "test-connect-MongoDB": "babel-node src/server/connect-db run-test",
-    "initialize-MongoDB-parameterToPassIn": "load-data", 
-    "initialize-MongoDB": "babel-node src/server/initialize-db " 
+    "initialize-MongoDB-parameterToPassIn": "load-data",
+    "initialize-MongoDB": "babel-node src/server/initialize-db ",
+    "server": "babel-node src/server/server",
+    "server-test" : "babel-node src/server/server.spec",
+    "server-test-update" : "babel-node src/server/server-update.spec"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +24,9 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "babel-loader": "^8.0.2",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
     "mongodb": "^3.1.10",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
