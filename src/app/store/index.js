@@ -14,7 +14,11 @@ import createSagaMiddleware from 'redux-saga';
 const sagaMiddleware = createSagaMiddleware();
 
 
-import * as sagas from './sagas.mock';
+
+// 06/22/2020 02:58 pm - SSN - [20200622-1425] - [002] - M06 - Integrating React view layers with persistent data
+
+// import * as sagas from './sagas.mock';
+import * as sagas from './sagas';
 
 
 import * as mutations from './mutations';
