@@ -3,13 +3,17 @@
 
 // npm run server-test
 
+import * as uuid from 'uuid';
+
 const { addNewTask } = require('./server');
 
 // import   { addNewTask } from  './server';
 
+let d = new Date();
+
 addNewTask({
-    name: "My Test task-20200622",
-    id: 202006221355
+    name: "My Test task-" + d.toLocaleString(),
+    id: uuid.v4()
 });
 
 

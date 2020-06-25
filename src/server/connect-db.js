@@ -28,13 +28,22 @@ export async function connectDB() {
 // scripts: "test-connect-MongoDB": "babel-node src/server/connect-db run-test"
 // npm run test-connect-MongoDB
 
-process.argv.forEach(function (val, index, array) {
+let authenticated = process.argv[2];
 
-    if (index === 2 && val.toUpperCase() === "RUN-TEST") {
-        connectDB();
-    }
+// process.argv.forEach(function (val, index, array) {
 
-});
+//     if (index === 2 && val.toUpperCase() === "RUN-TEST") {
+//         authenticated = true;
+//     }
+
+// });
+
+// For testing from the command prompt.
+
+if (authenticated) {
+    connectDB();
+}
+
 
 
 

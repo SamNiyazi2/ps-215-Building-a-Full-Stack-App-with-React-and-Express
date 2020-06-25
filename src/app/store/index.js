@@ -2,6 +2,7 @@
 // 06/20/2020 06:19 am - SSN - [20200620-0557] - [002] - M04 - Implementing React components and Redux state
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
+
 import { defaultState } from '../../server/defaultState'
 
 // 06/20/2020 10:24 pm - SSN - [20200620-2216] - [002] - M04 - Implementing React components and Redux state - Adding new task
@@ -34,13 +35,44 @@ export const store = createStore(
 
     combineReducers({
 
-        session(session = defaultState.session) {
-            return session;
+        session(userSession = defaultState.session || {}, action) {
+
+            console.log('cobineReducer-20200624-1137');
+
+            console.log('action', action);
+
+            let { type, authenticated, session } = action;
+
+
+            console.log('session', session);
+            console.log('userSession', userSession);
+
+            switch (type) {
+
+                case mutations.SET_STATE:
+                    return { ...userSession, id: action.state.session.id };
+
+                case mutations.REQUEST_AUTHENTICATE_USER:
+                    return { ...userSession, authenticated: mutations.AUTHENTICATING };
+
+                case mutations.PROCESSING_AUTHENTICATE_USER:
+                    return { ...userSession, authenticated };
+
+                default:
+                    return userSession;
+
+            }
         },
 
-        tasks(tasks = defaultState.tasks, action) {
+        // tasks(tasks = defaultState.tasks, action) {
+        tasks(tasks = [], action) {
 
             switch (action.type) {
+
+
+                case mutations.SET_STATE:
+                    return action.state.tasks;
+
 
                 case mutations.CREATE_TASK:
                     console.log(action);
@@ -99,15 +131,28 @@ export const store = createStore(
 
         },
 
-        comments(comments = defaultState.comments) {
+
+        // comments(comments = defaultState.comments) {
+        comments(comments = []) {
             return comments;
         },
 
-        groups(groups = defaultState.groups) {
+
+        // groups(groups = defaultState.groups, action ) {
+        groups(groups = [], action) {
+
+            switch (action.type) {
+
+                case mutations.SET_STATE:
+                    return action.state.groups;
+            }
+
             return groups;
         },
 
-        users(users = defaultState.users) {
+
+        // users(users = defaultState.users) {
+        users(users = []) {
             return users;
         }
 

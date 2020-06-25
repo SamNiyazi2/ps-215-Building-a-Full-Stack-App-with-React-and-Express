@@ -2,7 +2,11 @@
 // 06/20/2020 06:05 am - SSN - [20200620-0557] - [001] - M04 - Implementing React components and Redux state
 // https://github.com/danielstern/express-react-fullstack/blob/master/src/server/defaultState.js
 
-//import md5 from 'md5';
+
+// 06/24/2020 09:28 am - SSN - [20200624-0921] - [001] - M07 - Authentication concepts - Creating a login page
+import md5 from 'md5';
+
+
 export const defaultState = {
 
     session: {
@@ -12,12 +16,12 @@ export const defaultState = {
     users: [{
         id: "U1",
         name: "Dev",
-        //      passwordHash:md5("TUPLES"),
+        passwordHash: md5("TUPLES"),
         friends: [`U2`]
     }, {
         id: "U2",
         name: "C. Eeyo",
-        // passwordHash:md5("PROFITING"),
+        passwordHash: md5("PROFITING"),
         friends: []
     }],
     groups: [{

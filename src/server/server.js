@@ -6,6 +6,10 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { connectDB } from './connect-db';
 
+// 06/24/2020 11:14 am - SSN - [20200624-0921] - [005] - M07 - Authentication concepts - Creating a login page
+import { authenticationRoute } from './authenticate';
+
+
 let port = 3091;
 let app = express();
 
@@ -31,6 +35,10 @@ app.use(
     bodyParser.json()
 
 );
+
+
+console.log("Calling authenticationRoute in server.js... ");
+authenticationRoute(app);
 
 
 export const addNewTask = async task => {
@@ -71,7 +79,7 @@ app.post('/task/new', async (req, res) => {
 });
 
 
-app.post ( '/task/update', async ( req,res) => {
+app.post('/task/update', async (req, res) => {
 
     let task = req.body.task;
     await updateTask(task);
