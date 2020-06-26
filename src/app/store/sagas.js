@@ -9,7 +9,7 @@ import * as mutations from './mutations';
 
 import { history } from './history';
 
-const url = 'http://localhost:3091';
+const url = 'http://p3091.nonbs.net:3091';
 
 
 export function* taskCreationSaga() {
@@ -77,12 +77,24 @@ export function* userAuthenticationSaga() {
 
         const { username, password } = yield take(mutations.REQUEST_AUTHENTICATE_USER);
 
+        let lineNo = 1;
+
         try {
+
+            lineNo = 2;
+
             const { data } = yield axios.post(url + '/authenticate', { username, password });
+
+            lineNo = 3;
+
             if (!data) {
-                throw new Error();
+
+                lineNo = 4;
+                throw new Error(202);
 
             }
+
+            lineNo = 5;
 
             console.log("Authenticated. 20200624-1126", data);
 
@@ -96,8 +108,15 @@ export function* userAuthenticationSaga() {
 
 
         } catch (e) {
-            console.log("Can't authenticate");
-            yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED));
+            console.log("Error: lineNo [", lineNo, "]");
+
+            console.log("Can't authenticate [", e, "]");
+
+            if (lineNo == 2)
+                yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED_INVALID_2));
+            else
+                yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED));
+
 
         }
     }

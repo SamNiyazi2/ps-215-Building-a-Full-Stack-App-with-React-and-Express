@@ -11,15 +11,21 @@ export const Dashboard = ({ groups }) => {
     keyId = keyId + 1;
 
     // return <div key={keyId}>{group.name}</div>;
-    return <ConnectedTaskList key={group.id} id={group.id} name={group.name} />;
+    return (
+      <ConnectedTaskList
+        key={group.id}
+        id={group.id}
+        name={group.name}
+        className="col"
+      />
+    );
   });
 
   return (
-    <div>
-      <h2>Dashboard (Dashboard.jsx - 104)</h2>
-
-      {divs}
-    </div>
+    <>
+      <span className="small">(Dashboard.jsx - 104)</span>
+      <div className="row">{divs}</div>
+    </>
   );
 };
 

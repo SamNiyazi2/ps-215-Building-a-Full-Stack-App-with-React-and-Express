@@ -3,13 +3,13 @@
 const path = require("path");
 
 module.exports = {
-  
+
     devtool: "source-map",
     mode: "development",
     entry: {
 
         // app: path.resolve(__dirname, 'src', 'app') 
-        app: './src/app' 
+        app: './src/app'
 
     },
 
@@ -26,8 +26,9 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         port: 3090,
+        host: "p3090.nonbs.net",
         inline: false // To enable browser refresh
-       
+
     },
     module: {
         rules: [
@@ -35,12 +36,16 @@ module.exports = {
                 test: /\.jsx?/,
                 loader: 'babel-loader',
                 exclude: /node_modules/
+            },
+            {
+                test:/\.css$/,
+                loader:'css-loader'
             }
         ]
     },
 
     watchOptions: {
         ignored: /node_modules/
-      }
+    }
 
 }

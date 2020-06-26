@@ -16,7 +16,7 @@ export async function connectDB() {
 
     db = client.db();
 
-    console.info("Got DB, ", db);
+    // console.info("Got DB, ", db);
 
     return db;
 

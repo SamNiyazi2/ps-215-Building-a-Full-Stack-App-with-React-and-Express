@@ -21,6 +21,10 @@ export const AUTHENTICATING = 'AUTHENTICATING';
 export const AUTHENTICATED = 'AUTHENTICATED';
 export const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED';
 
+// Incomplete implementation
+export const NOT_AUTHENTICATED_INVALID_1 = 'NOT_AUTHENTICATED_INVALID_1';
+export const NOT_AUTHENTICATED_INVALID_2 = 'NOT_AUTHENTICATED_INVALID_2';
+
 export const SET_STATE = 'SET_STATE';
 
 
@@ -77,7 +81,8 @@ export const requestAuthenticateUser = (username, password) => ({
 export const processAuthenticateUser = (status = AUTHENTICATING, session = null) => ({
     type: PROCESSING_AUTHENTICATE_USER,
     session,
-    authenticated: status
+    authenticated: status,
+    authenticationResults: "processAuthenticateUser-1240"
 });
 
 

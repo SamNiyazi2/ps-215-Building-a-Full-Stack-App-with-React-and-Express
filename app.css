@@ -2,3 +2,15 @@
 h4{
     color:red;
 }
+
+.small{
+    color:green;
+    font-size:9pt;
+}
+
+.ssn-card {
+
+    padding:10px;
+    margin:0px;
+    border:4px solid transparent;
+}

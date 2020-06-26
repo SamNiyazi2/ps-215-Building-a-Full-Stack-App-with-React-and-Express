@@ -18,18 +18,26 @@ export const TaskList = ({
   createNewTask,
   someOtherFunction,
 }) => (
-  <div>
+  <div className="ssn-card card  col-md-4 col-sm-12">
     <h3>{name}</h3>
     <div>
       {tasks.map((task) => (
         <Link to={`/task/${task.id}`} key={task.id}>
-          <div> {task.name}</div>
+          <div className="card p-2 mt-2"> {task.name}</div>
         </Link>
       ))}
     </div>
 
-    <button onClick={() => createNewTask(id)}>Add New Task</button>
-    <button onClick={() => someOtherFunction(id, 500002)}>
+    <button
+      className="btn btn-primary  mt-2 "
+      onClick={() => createNewTask(id)}
+    >
+      Add New Task
+    </button>
+    <button
+      className="btn btn-secondary  mt-1"
+      onClick={() => someOtherFunction(id, 500002)}
+    >
       Some other function
     </button>
   </div>

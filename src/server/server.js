@@ -22,8 +22,17 @@ app.listen(port, () => {
 
 app.get('/', (req, res) => {
 
-    console.log("Sending response...");
-    res.send('Hello World!!!');
+    let d = new Date()
+    console.log("Sending response to get / ...", d.toLocaleTimeString());
+    res.send('Response to get / ' + d.toLocaleTimeString());
+
+});
+
+app.post('/testpost', (req, res) => {
+
+    let d = new Date()
+    console.log("Response to post /testpost...", d.toLocaleTimeString());
+    res.send('Response to post /testpost ' + d.toLocaleTimeString());
 
 });
 

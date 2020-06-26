@@ -38,7 +38,7 @@ export const Main = () => (
   <Router history={history}>
     <Provider store={store}>
       <div>
-        <h4>(main.jsx - 133) </h4>
+        <h4 className="small">(main.jsx - 133) </h4>
 
         <ConnectedNavigation />
 

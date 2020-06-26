@@ -53,10 +53,10 @@ export const store = createStore(
                     return { ...userSession, id: action.state.session.id };
 
                 case mutations.REQUEST_AUTHENTICATE_USER:
-                    return { ...userSession, authenticated: mutations.AUTHENTICATING };
+                    return { ...userSession, authenticated: mutations.AUTHENTICATING, authenticationResults: "in mutations.REQUEST_AUTHENTICATE_USER-1242" }; //  authenticationResults incomplete implmentation. 
 
                 case mutations.PROCESSING_AUTHENTICATE_USER:
-                    return { ...userSession, authenticated };
+                    return { ...userSession, authenticated, authenticationResults: "See authenticated" };
 
                 default:
                     return userSession;
