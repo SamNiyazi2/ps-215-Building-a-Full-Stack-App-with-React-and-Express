@@ -9,25 +9,25 @@ import * as mutations from './mutations';
 
 import { history } from './history';
 
-const url = 'http://p3091.nonbs.net:3091';
+const url = 'http://p3091.nonbs.org:3091';
 
 
 export function* taskCreationSaga() {
 
 
-    while (true) {
+    while ( true ) {
 
-        const { groupID } = yield take(mutations.REQUEST_TASK_CREATION);
+        const { groupID } = yield take( mutations.REQUEST_TASK_CREATION );
 
         const ownerID = 'U1';
         const taskID = uuid.v4();
 
-        yield put(mutations.createTask(taskID, groupID, ownerID));
+        yield put( mutations.createTask( taskID, groupID, ownerID ) );
 
 
         let d = new Date();
 
-        const { res } = yield axios.post(url + '/task/new', {
+        const { res } = yield axios.post( url + '/task/new', {
 
             task: {
                 id: taskID,
@@ -36,25 +36,25 @@ export function* taskCreationSaga() {
                 isComplete: false,
                 name: "New Task " + d
             }
-        });
+        } );
 
-        console.log("taskCreationSaga - resp", res);
+        console.log( "taskCreationSaga - resp", res );
 
     }
 }
 
 export function* taskModificationSaga() {
 
-    while (true) {
+    while ( true ) {
 
-        const task = yield take([
+        const task = yield take( [
             mutations.SET_TASK_GROUP,
             mutations.SET_TASK_NAME,
             mutations.SET_TASK_COMPLETE
 
-        ]);
+        ] );
 
-        axios.post(url + '/task/update', {
+        axios.post( url + '/task/update', {
             task: {
                 id: task.taskID,
                 group: task.groupID,
@@ -62,7 +62,7 @@ export function* taskModificationSaga() {
                 isComplete: task.isComplete,
                 name: task.name
             }
-        })
+        } )
     }
 }
 
@@ -71,11 +71,11 @@ export function* taskModificationSaga() {
 
 export function* userAuthenticationSaga() {
 
-    console.log("userAuthenticationSaga-1001");
+    console.log( "userAuthenticationSaga-1001" );
 
-    while (true) {
+    while ( true ) {
 
-        const { username, password } = yield take(mutations.REQUEST_AUTHENTICATE_USER);
+        const { username, password } = yield take( mutations.REQUEST_AUTHENTICATE_USER );
 
         let lineNo = 1;
 
@@ -83,39 +83,39 @@ export function* userAuthenticationSaga() {
 
             lineNo = 2;
 
-            const { data } = yield axios.post(url + '/authenticate', { username, password });
+            const { data } = yield axios.post( url + '/authenticate', { username, password } );
 
             lineNo = 3;
 
-            if (!data) {
+            if ( !data ) {
 
                 lineNo = 4;
-                throw new Error(202);
+                throw new Error( 202 );
 
             }
 
             lineNo = 5;
 
-            console.log("Authenticated. 20200624-1126", data);
+            console.log( "Authenticated. 20200624-1126", data );
 
-            yield put(mutations.setState(data.state));
-            yield put(mutations.processAuthenticateUser(mutations.AUTHENTICATED));
-            console.log("Authenticated. 20200624-1126 - state set and authenticated");
+            yield put( mutations.setState( data.state ) );
+            yield put( mutations.processAuthenticateUser( mutations.AUTHENTICATED ) );
+            console.log( "Authenticated. 20200624-1126 - state set and authenticated" );
 
-            history.push('/dashboard');
+            history.push( '/dashboard' );
 
-            console.log("Authenticated. 20200624-1126 - history/push('/dashboard')");
+            console.log( "Authenticated. 20200624-1126 - history/push('/dashboard')" );
 
 
-        } catch (e) {
-            console.log("Error: lineNo [", lineNo, "]");
+        } catch ( e ) {
+            console.log( "Error: lineNo [", lineNo, "]" );
 
-            console.log("Can't authenticate [", e, "]");
+            console.log( "Can't authenticate [", e, "]" );
 
-            if (lineNo == 2)
-                yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED_INVALID_2));
+            if ( lineNo == 2 )
+                yield put( mutations.processAuthenticateUser( mutations.NOT_AUTHENTICATED_INVALID_2 ) );
             else
-                yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED));
+                yield put( mutations.processAuthenticateUser( mutations.NOT_AUTHENTICATED ) );
 
 
         }

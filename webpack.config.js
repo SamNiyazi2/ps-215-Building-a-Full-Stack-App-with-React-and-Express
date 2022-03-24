@@ -1,6 +1,6 @@
 
 
-const path = require("path");
+const path = require( "path" );
 
 module.exports = {
 
@@ -14,7 +14,7 @@ module.exports = {
     },
 
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve( __dirname, 'dist' ),
         filename: '[name]-bundle.js',
         publicPath: '/'
     },
@@ -26,7 +26,7 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         port: 3090,
-        host: "p3090.nonbs.net",
+        host: "p3090.nonbs.org",
         inline: false // To enable browser refresh
 
     },
@@ -38,8 +38,8 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test:/\.css$/,
-                loader:'css-loader'
+                test: /\.css$/,
+                loader: 'css-loader'
             }
         ]
     },

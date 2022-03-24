@@ -33,21 +33,21 @@ export const store = createStore(
 
     // },
 
-    combineReducers({
+    combineReducers( {
 
-        session(userSession = defaultState.session || {}, action) {
+        session( userSession = defaultState.session || {}, action ) {
 
-            console.log('cobineReducer-20200624-1137');
+            console.log( 'cobineReducer-20200624-1137' );
 
-            console.log('action', action);
+            console.log( 'action', action );
 
             let { type, authenticated, session } = action;
 
 
-            console.log('session', session);
-            console.log('userSession', userSession);
+            console.log( 'session', session );
+            console.log( 'userSession', userSession );
 
-            switch (type) {
+            switch ( type ) {
 
                 case mutations.SET_STATE:
                     return { ...userSession, id: action.state.session.id };
@@ -65,9 +65,9 @@ export const store = createStore(
         },
 
         // tasks(tasks = defaultState.tasks, action) {
-        tasks(tasks = [], action) {
+        tasks( tasks = [], action ) {
 
-            switch (action.type) {
+            switch ( action.type ) {
 
 
                 case mutations.SET_STATE:
@@ -75,15 +75,15 @@ export const store = createStore(
 
 
                 case mutations.CREATE_TASK:
-                    console.log(action);
+                    console.log( action );
 
-                    return [...tasks, {
+                    return [ ...tasks, {
                         id: action.taskID,
-                        name: "New Tasl",
+                        name: "New TasK",
                         group: action.groupID,
                         owner: action.ownerID,
                         isComplete: false
-                    }];
+                    } ];
 
 
 
@@ -93,38 +93,38 @@ export const store = createStore(
                 case mutations.SET_TASK_COMPLETE:
 
 
-                    console.log('store/index combineReducer action - ', action.type);
-                    console.log(action);
+                    console.log( 'store/index combineReducer action - ', action.type );
+                    console.log( action );
 
-                    return tasks.map(task => {
+                    return tasks.map( task => {
 
-                        return (task.id === action.taskID ? { ...task, isComplete: action.isComplete } : task);
+                        return ( task.id === action.taskID ? { ...task, isComplete: action.isComplete } : task );
 
-                    });
+                    } );
 
 
 
                 case mutations.SET_TASK_NAME:
 
-                    console.log('store/index combineReducer action - ', action.type);
-                    console.log(action);
+                    console.log( 'store/index combineReducer action - ', action.type );
+                    console.log( action );
 
-                    return tasks.map(task => {
+                    return tasks.map( task => {
 
-                        return (task.id === action.taskID ? { ...task, name: action.name } : task);
+                        return ( task.id === action.taskID ? { ...task, name: action.name } : task );
 
-                    });
+                    } );
 
 
                 case mutations.SET_TASK_GROUP:
 
-                    console.log('store/index combineReducer action - ', action.type);
-                    console.log(action);
+                    console.log( 'store/index combineReducer action - ', action.type );
+                    console.log( action );
 
-                    return tasks.map(task => {
+                    return tasks.map( task => {
 
-                        return (task.id == action.taskID ? { ...task, group: action.groupID } : task);
-                    });
+                        return ( task.id == action.taskID ? { ...task, group: action.groupID } : task );
+                    } );
 
             }
             return tasks;
@@ -133,15 +133,15 @@ export const store = createStore(
 
 
         // comments(comments = defaultState.comments) {
-        comments(comments = []) {
+        comments( comments = [] ) {
             return comments;
         },
 
 
         // groups(groups = defaultState.groups, action ) {
-        groups(groups = [], action) {
+        groups( groups = [], action ) {
 
-            switch (action.type) {
+            switch ( action.type ) {
 
                 case mutations.SET_STATE:
                     return action.state.groups;
@@ -152,16 +152,16 @@ export const store = createStore(
 
 
         // users(users = defaultState.users) {
-        users(users = []) {
+        users( users = [] ) {
             return users;
         }
 
-    }),
+    } ),
 
 
-    applyMiddleware(createLogger(), sagaMiddleware)
+    applyMiddleware( createLogger(), sagaMiddleware )
 )
 
-for (let saga in sagas) {
-    sagaMiddleware.run(sagas[saga]);
+for ( let saga in sagas ) {
+    sagaMiddleware.run( sagas[ saga ] );
 }
