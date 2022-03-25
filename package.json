@@ -11,7 +11,9 @@
     "test-connect-MongoDB": "babel-node src/server/connect-db ",
     "initialize-MongoDB-parameterToPassIn": "load-data force",
     "initialize-MongoDB": "babel-node src/server/initialize-db ",
-    "server": "babel-node src/server/server",
+    "Error-101": "// 03/25/20022 01:42 pm - SSN - --trace-deprecation ... from error messages in server console.",
+    "Error-101": "// 03/25/20022 01:58 pm - SSN - --trace-warnings ... from error messages in server console.",
+    "server": "babel-node src/server/server --trace-deprecation --trace-warnings ",
     "server-test": "babel-node src/server/server.spec",
     "server-test-update": "babel-node src/server/server-update.spec",
     "start-dev": "concurrently    \"npm run server\"    \"npm run dev\" "

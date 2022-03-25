@@ -4,15 +4,17 @@
 
 import { MongoClient } from 'mongodb';
 
-const url = 'mongodb+srv://User101:riG18mTFsa4S302c@clusterssn101-q8y6c.azure.mongodb.net/PSReactRedux20200622'
+const url = 'mongodb+srv://User101:9j-n5vF7Z4YDyF3@clusterssn101.q8y6c.azure.mongodb.net/PSReactRedux20200622'
 
 let db = null;
 
 export async function connectDB() {
 
-    if (db) return db;
+    if ( db ) return db;
 
-    let client = await MongoClient.connect(url, { useNewUrlParser: true });
+    // 03/25/2022 01:40 pm - SSN - Added useUnifiedTopology: true  from error messages in server console.
+
+    let client = await MongoClient.connect( url, { useNewUrlParser: true, useUnifiedTopology: true } );
 
     db = client.db();
 
@@ -28,7 +30,7 @@ export async function connectDB() {
 // scripts: "test-connect-MongoDB": "babel-node src/server/connect-db run-test"
 // npm run test-connect-MongoDB
 
-let authenticated = process.argv[2];
+let authenticated = process.argv[ 2 ];
 
 // process.argv.forEach(function (val, index, array) {
 
@@ -40,7 +42,7 @@ let authenticated = process.argv[2];
 
 // For testing from the command prompt.
 
-if (authenticated) {
+if ( authenticated ) {
     connectDB();
 }
 

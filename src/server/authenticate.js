@@ -9,19 +9,19 @@ import { connectDB } from './connect-db';
 import * as mutations from '../app/store/mutations';
 
 
-console.log("authenticate.js - Begin file ");
+console.log( "authenticate.js - Begin file " );
 
 const authenticationTokens = [];
 
 
-async function assembleUserState(user) {
+async function assembleUserState( user ) {
 
-    console.log("assembleUserState-001");
+    console.log( "assembleUserState-001" );
 
     let db = await connectDB();
 
-    let tasks = await db.collection('tasks').find({ owner: user.id }).toArray();
-    let groups = await db.collection('groups').find({ owner: user.id }).toArray();
+    let tasks = await db.collection( 'tasks' ).find( { owner: user.id } ).toArray();
+    let groups = await db.collection( 'groups' ).find( { owner: user.id } ).toArray();
 
     return {
         tasks,
@@ -35,56 +35,61 @@ async function assembleUserState(user) {
 export const authenticationRoute = app => {
 
 
-    console.log('authenticationRoute-001');
+    console.log( 'authenticationRoute-001' );
 
 
-    app.post('/authenticate', async (req, res) => {
+    app.post( '/authenticate', async ( req, res ) => {
 
-        console.log('authenticate-1001');
+        console.log( 'authenticate-1001' );
 
         let { username, password } = req.body;
         let db = await connectDB();
-        let collection = db.collection('users');
 
-        let user = await collection.findOne({ name: username });
+        console.log( 'authenticate-1001-B' );
 
-        console.log('authenticate-1002-v4 [', username, ']');
+        let collection = db.collection( 'users' );
+
+        console.log( 'authenticate-1001-C' );
+
+        let user = await collection.findOne( { name: username } );
+
+        console.log( 'authenticate-1002-v4 [', username, ']' );
 
 
-        if (!user) {
-            return res.status(500).send("User not found");
+        if ( !user ) {
+            return res.status( 500 ).send( "User not found" );
         }
 
-        console.log('authenticate-1003');
+        console.log( 'authenticate-1003' );
 
-        let hash = md5(password);
+        let hash = md5( password );
         let passwordCorrect = hash === user.passwordHash;
 
-        console.log('authenticate-1004');
+        console.log( 'authenticate-1004' );
 
-        if (!passwordCorrect) {
-            return res.status(500).send("Password incorrect");
+        if ( !passwordCorrect ) {
+            return res.status( 500 ).send( "Password incorrect" );
         }
 
         let token = uuid.v4();
 
-        authenticationTokens.push({
+        authenticationTokens.push( {
             token,
             userID: user.id
-        });
+        } );
 
-        let state = await assembleUserState(user);
+        let state = await assembleUserState( user );
 
-        console.log(state);
+        console.log( state );
 
-        res.send({ token, state });
+        res.send( { token, state } );
 
-        console.log('authenticate-9999-v2');
+        console.log( 'authenticate-9999-v2' );
 
 
-    });
+    } );
 
 }
 
 
-console.log("authenticate.js - End file ");
+console.log( "authenticate.js - End file " );
