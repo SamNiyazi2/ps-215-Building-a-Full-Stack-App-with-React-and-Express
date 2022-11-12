@@ -37,7 +37,7 @@ export const store = createStore(
 
         session( userSession = defaultState.session || {}, action ) {
 
-            console.log( 'cobineReducer-20200624-1137' );
+            console.log( 'combineReducer-20200624-1137' );
 
             console.log( 'action', action );
 

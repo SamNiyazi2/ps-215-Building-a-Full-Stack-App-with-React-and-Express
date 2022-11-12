@@ -74,8 +74,15 @@ export function* userAuthenticationSaga() {
     console.log( "userAuthenticationSaga-1001" );
 
     while ( true ) {
+        console.log( "userAuthenticationSaga-1001-loop" );
 
         const { username, password } = yield take( mutations.REQUEST_AUTHENTICATE_USER );
+
+
+        console.log( "userAuthenticationSaga-1001-loop-2" );
+        console.dir( `username: ${username}` );
+        console.dir( `password: ${password}` );
+
 
         let lineNo = 1;
 
@@ -84,6 +91,8 @@ export function* userAuthenticationSaga() {
             lineNo = 2;
 
             const { data } = yield axios.post( url + '/authenticate', { username, password } );
+            console.log( "userAuthenticationSaga-1001-loop-3" );
+            console.dir( data );
 
             lineNo = 3;
 

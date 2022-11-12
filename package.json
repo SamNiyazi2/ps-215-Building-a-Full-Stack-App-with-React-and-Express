@@ -5,15 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --watch",
-    "dev": "webpack-dev-server --open --watch",
+    "build": "title %ssn_ps_251_build1% && webpack --watch",
+    "dev": "title %ssn_ps_251_client% && webpack-dev-server --open --watch",
     "test-connect-MongoDB_passKey": "babel-node src/server/connect-db run-test",
     "test-connect-MongoDB": "babel-node src/server/connect-db ",
     "initialize-MongoDB-parameterToPassIn": "load-data force",
     "initialize-MongoDB": "babel-node src/server/initialize-db ",
-    "Error-101": "// 03/25/20022 01:42 pm - SSN - --trace-deprecation ... from error messages in server console.",
     "Error-101": "// 03/25/20022 01:58 pm - SSN - --trace-warnings ... from error messages in server console.",
-    "server": "babel-node src/server/server --trace-deprecation --trace-warnings ",
+    "server": "title %ssn_ps_251_server% && babel-node src/server/server --trace-deprecation --trace-warnings ",
     "server-test": "babel-node src/server/server.spec",
     "server-test-update": "babel-node src/server/server-update.spec",
     "start-dev": "concurrently    \"npm run server\"    \"npm run dev\" "
@@ -39,6 +38,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@azure/identity": "^2.0.4",
+    "@azure/keyvault-secrets": "^4.4.0",
     "axios": "^0.18.0",
     "history": "^4.7.2",
     "md5": "^2.2.1",

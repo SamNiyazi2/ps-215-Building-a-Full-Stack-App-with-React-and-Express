@@ -7,7 +7,7 @@ import * as mutations from '../store/mutations';
 
 import '../../../app.css';
 
-const LoginComponent = ({ authenticateUser, authenticated, authenticationResults }) => {
+const LoginComponent = ( { authenticateUser, authenticated, authenticationResults } ) => {
   return (
     <div className="card p-3 col-lg-6">
       <h4>Please login</h4>
@@ -15,12 +15,18 @@ const LoginComponent = ({ authenticateUser, authenticated, authenticationResults
       <form onSubmit={authenticateUser} >
 
         <p className="small">Dev/TUPLES</p>
-        <input type="text" placeholder="username" name="username" className="form-control"/>
-        <input type="password" placeholder="password" name="password" className="form-control mt-2"/>
-        {console.log('test-login-1001 - authenticated', authenticated)}
-     
+        <input type="text" placeholder="username" name="username" className="form-control" />
+        <input type="password" placeholder="password" name="password" className="form-control mt-2" />
+        {console.log( 'test-login-1001 - authenticated', authenticated )}
+
+        {authenticated === mutations.NOT_AUTHENTICATED_INVALID_2 ? (
+          <p> Invaid login (2) </p>
+        ) : null}
         {authenticated === mutations.NOT_AUTHENTICATED ? (
           <p> Login incorrect [{authenticated}] --- [{authenticationResults}] </p>
+        ) : null}
+        {authenticated === mutations.AUTHENTICATING ? (
+          <p> Authenticating... </p>
         ) : null}
         <button type="submit" className="form-control btn btn-primary ">Login</button>
       </form>
@@ -28,23 +34,23 @@ const LoginComponent = ({ authenticateUser, authenticated, authenticationResults
   );
 };
 
-const mapStateToProps = ({ session }) => ({
+const mapStateToProps = ( { session } ) => ( {
   authenticated: session.authenticated,
-});
+} );
 
-const mapDispatchToProps = (dispatch) => ({
-  authenticateUser(e) {
+const mapDispatchToProps = ( dispatch ) => ( {
+  authenticateUser( e ) {
     e.preventDefault();
 
-    console.log('Calling authenticateUser...');
+    console.log( 'Calling authenticateUser...' );
 
-    let username = e.target['username'].value;
-    let password = e.target['password'].value;
-    dispatch(mutations.requestAuthenticateUser(username, password));
+    let username = e.target[ 'username' ].value;
+    let password = e.target[ 'password' ].value;
+    dispatch( mutations.requestAuthenticateUser( username, password ) );
   },
-});
+} );
 
 export const ConnectedLogin = connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginComponent);
+)( LoginComponent );

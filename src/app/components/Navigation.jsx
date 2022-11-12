@@ -7,10 +7,10 @@ import React from 'react';
 const Navigation = () => (
   <div>
     <Link to="/dashboard" >
-     <h1>My Application</h1>
+      <h3>PS-215-React/Express Application</h3>
     </Link>
   </div>
 );
 
 
-export const ConnectedNavigation = connect ( state => state ) (Navigation);
+export const ConnectedNavigation = connect( state => state )( Navigation );
